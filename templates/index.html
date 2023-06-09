@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+  <title>Bjorn's SQL Translator</title>
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='sql_logo.png') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+
+<body>
+  <img src="{{ url_for('static', filename='sql_logo.png') }}" width = "400" height = "150" />
+  <h3>Bjorn's SQL Translator</h3>
+  <p>Let's say you have three data tables: 
+    <ul>
+      <li>Employee(id, name, department_id) </li> 
+      <li>Department(id, name, address) </li> 
+      <li> Salary_Payments(id, employee_id, amount, date) </li>
+    </ul>
+  Given thoses tables, ask something in English and Chat GPT will translate to PostgreSQL</p>
+  <form action="/" method="post">
+    <input type="text" name="animal" placeholder="Enter your question in English" required />
+    <input type="submit" value="Generate SQL" />
+  </form>
+  {% if result %}
+  <div class="result">{{ result }}</div>
+  {% endif %}
+</body>
