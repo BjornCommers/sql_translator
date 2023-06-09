@@ -12,10 +12,10 @@ openai.api_key = constants.openai_api_key
 @app.route("/", methods=("GET", "POST"))
 def index():
     if request.method == "POST":
-        animal = request.form["animal"]
+        english_question = request.form["english_question"]
         response = openai.Completion.create(
           model="text-davinci-003",
-          prompt=generate_prompt(animal),
+          prompt=generate_prompt(english_question),
           temperature=0,
           max_tokens=150,
           top_p=1.0,
@@ -29,8 +29,8 @@ def index():
     return render_template("index.html", result=result)
 
 
-def generate_prompt(animal):
+def generate_prompt(english_question):
     return """### Postgres SQL tables, with their properties:\n#\n# Employee(id, name, department_id)\n# Department(id, name, address)\n# Salary_Payments(id, employee_id, amount, date)\n#\n### {}\n
 """.format(
-        animal
+        english_question
     )
